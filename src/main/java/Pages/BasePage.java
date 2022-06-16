@@ -27,7 +27,18 @@ public class BasePage {
         element = driver.findElement(By.xpath(xpath));
         return element;
     }
-
+    public WebElement findElementByPartTextLink(String text) {
+        WebElement element;
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.partialLinkText(text)));
+        element = driver.findElement(By.partialLinkText(text));
+        return element;
+    }
+    public WebElement findElementByLinkText(String text) {
+        WebElement element;
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.linkText(text)));
+        element = driver.findElement(By.linkText(text));
+        return element;
+    }
     protected void clickElementByXpath(String xpath) {
         logger.info("Clicking element by xpath" + xpath);
         findElementByXpath(xpath).click();

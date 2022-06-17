@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 public class MainPageTests extends BaseTest {
 
     private static MainPage mainPage;
@@ -75,11 +74,8 @@ public class MainPageTests extends BaseTest {
 
         mainPage.findElementByXpath("//input[@class='cart__qty-input']").clear();
         mainPage.findElementByXpath("//input[@class='cart__qty-input']").sendKeys("6");
-        String subtotal5 = mainPage.findElementByXpath("//span[@class='cart__subtotal']").getText();
-       mainPage.findElementByXpath("//input[@name='checkout']").click();
-        //  clickUpdateButton();
-        Assertions.assertTrue( subtotal5 != mainPage.findElementByXpath(
-                "//span[@class='order-summary__emphasis total-recap__final-price skeleton-while-loading']").getText());
-
+        String subtotal5 = mainPage.checkSubtotal();
+        mainPage.clickUpdateButton();
+        Assertions.assertNotEquals(subtotal5, mainPage.checkSubtotal());
     }
 }
